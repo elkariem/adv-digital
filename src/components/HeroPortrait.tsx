@@ -4,10 +4,15 @@ import { t, tx, type Locale } from "@/lib/i18n";
 /**
  * Owner portrait set into an organic, biomorphic frame.
  *
- * The photo is the supplied /public/owner.jfif, untouched: no retouching, no
+ * The photo is the supplied /public/owner.jpg, untouched: no retouching, no
  * filters, no colour grading. It is cropped with object-top inside a
  * near-square frame so the face is never cut off, and masked by a static
  * organic radius so the person itself never deforms.
+ *
+ * The extension is .jpg, not .jfif, deliberately: a JFIF file is a plain JPEG,
+ * but .jfif is absent from every standard MIME-extension map, so hosts and
+ * CDNs that serve /public 404 the original and the image optimizer then fails
+ * in production while working fine under `next dev` and `next start`.
  *
  * Only the layered shapes *behind* the portrait animate (see globals.css).
  * That keeps the owner's face completely stable while the composition still
@@ -41,7 +46,7 @@ export function HeroPortrait({ locale }: { locale: Locale }) {
       {/* The portrait. Static mask + gentle entrance only. */}
       <div className="portrait-mask portrait-enter absolute inset-0 overflow-hidden bg-burgundy-deep">
         <Image
-          src="/owner.jfif"
+          src="/owner.jpg"
           alt=""
           fill
           priority
