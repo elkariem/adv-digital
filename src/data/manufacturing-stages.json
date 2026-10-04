@@ -1,0 +1,60 @@
+{
+  "manufacturingStages": [
+    {
+      "id": "case-received",
+      "title": { "ar": "استلام المسح الرقمي أو القالب", "en": "Case Received" },
+      "description": {
+        "ar": "نستلم المسح الرقمي أو القالب الفيزيائي من العيادة ونسوي مراجعة أولية للمقاسات والملاحظات.",
+        "en": "We receive the digital scan or physical impression from the clinic and perform an initial review of the measurements and notes."
+      }
+    },
+    {
+      "id": "digital-design",
+      "title": { "ar": "التصميم الرقمي للتركيبة", "en": "Digital Design" },
+      "description": {
+        "ar": "نصمم شكل التركيبة رقمياً، وإذا كانت الحالة تحتاج موافقة، نرسل للطبيب معاينة قبل التصنيع.",
+        "en": "We digitally design the restoration and, when required, send a preview to the dentist before manufacturing."
+      }
+    },
+    {
+      "id": "manufacturing",
+      "title": { "ar": "التصنيع بالفريزر", "en": "Manufacturing" },
+      "description": {
+        "ar": "نصنّع التركيبة بالخامة المختارة بدقة عالية ومطابقة للتصميم المعتمد.",
+        "en": "The restoration is manufactured from the selected material with high precision according to the approved digital design."
+      }
+    },
+    {
+      "id": "layering-coloring",
+      "title": { "ar": "الطبقات وضبط اللون", "en": "Layering & Coloring" },
+      "description": {
+        "ar": "فنيّ التلوين يضيف الطبقات والتفاصيل اللي تعطي العمق والشفافية الطبيعية حسب درجة لون السن.",
+        "en": "The technician adds the layers and color details that create natural depth and translucency according to the required shade."
+      }
+    },
+    {
+      "id": "quality-check",
+      "title": { "ar": "فحص الجودة", "en": "Quality Check" },
+      "description": {
+        "ar": "نسوي مراجعة نهائية للمقاس واللون والتشطيب قبل تغليف الحالة.",
+        "en": "A final check is performed for fit, shade, and finishing before the case is packaged."
+      }
+    },
+    {
+      "id": "packaging-shipping",
+      "title": { "ar": "التغليف والشحن", "en": "Packaging & Shipping" },
+      "description": {
+        "ar": "نغلف الحالة بشكل آمن ونشحنها للعيادة مع تحديث حالتها في نظام المتابعة.",
+        "en": "The case is securely packaged and shipped to the clinic, with its status updated in the tracking system."
+      }
+    },
+    {
+      "id": "delivered",
+      "title": { "ar": "تم التسليم", "en": "Delivered" },
+      "description": {
+        "ar": "تم تسليم الحالة للعيادة.",
+        "en": "The case has been delivered to the clinic."
+      }
+    }
+  ]
+}

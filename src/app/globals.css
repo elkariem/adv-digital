@@ -1,0 +1,534 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-burgundy: #4a1525;
+  --color-burgundy-deep: #380f1c;
+  --color-burgundy-accent: #8c1d33;
+
+  --color-gold: #e2c372;
+  --color-gold-strong: #d4af37;
+  /* Darkened gold for small text on cream: 5.4:1 contrast, keeps the accent readable. */
+  --color-gold-deep: #7a5e1e;
+
+  --color-ivory: #faf0d7;
+  --color-beige: #e8c87a;
+
+  /* Text + neutral surfaces. `charcoal` is now a deep burgundy-tinted ink. */
+  --color-charcoal: #2b1119;
+  --color-muted: #6b5a50;
+
+  --font-sans: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Shared organic shapes. The portrait clip is static so the person never
+     deforms; only the surrounding layers animate. */
+  --radius-blob-a: 46% 54% 42% 58% / 52% 44% 56% 48%;
+  --radius-blob-b: 58% 42% 39% 61% / 44% 54% 46% 56%;
+  --radius-blob-c: 40% 60% 55% 45% / 60% 40% 60% 40%;
+
+  /* Smooth radii. Buttons are fully rounded, cards and fields use a softer
+     curve that matches the organic portrait language without looking bubbly. */
+  --radius-btn: 999px;
+  --radius-card: 1.25rem;
+  --radius-field: 0.875rem;
+  --radius-panel: 1.75rem;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Anchor targets clear the fixed header. */
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Cairo ships lighter Arabic glyphs at small sizes; a touch more weight and
+     spacing keeps body copy comfortable rather than thin. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-charcoal);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-strong);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* ---------- Entrance reveals ---------- */
+  /* Restrained entrance used across sections; opt in via data-reveal. */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s var(--ease-out-soft),
+      transform 0.7s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal="visible"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Without JS the observer never fires, so content must stay visible. */
+  @media (scripting: none) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Reduced motion: kill transforms so nothing shifts or drifts. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .card:hover,
+    .btn:hover:not(:disabled),
+    .btn-primary:hover,
+    .btn-gold:hover,
+    .btn-outline:hover {
+      transform: none;
+    }
+  }
+
+  /* ---------- Premium card ---------- */
+  /* One card treatment for services, reviews and forms: hairline border,
+     generous padding, soft radius, restrained hover lift. */
+  .card {
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 12%, transparent);
+    border-radius: var(--radius-card);
+    background-color: #fff;
+    padding: 1.75rem;
+    transition:
+      border-color 0.35s var(--ease-out-soft),
+      transform 0.35s var(--ease-out-soft),
+      box-shadow 0.35s var(--ease-out-soft);
+  }
+
+  .card:hover {
+    border-color: color-mix(in srgb, var(--color-gold-strong) 55%, transparent);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px -28px color-mix(in srgb, var(--color-burgundy) 70%, transparent);
+  }
+
+  /* ---------- Surfaces ---------- */
+  /* Raised panel used for tool pages (track, manage). Softer than .card and
+     lifted with a wide, low-contrast shadow so it reads as a distinct plane. */
+  .panel {
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 10%, transparent);
+    border-radius: var(--radius-panel);
+    background-color: #fff;
+    box-shadow:
+      0 1px 2px color-mix(in srgb, var(--color-burgundy) 5%, transparent),
+      0 24px 48px -32px color-mix(in srgb, var(--color-burgundy) 45%, transparent);
+  }
+
+  .panel-inset {
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 10%, transparent);
+    border-radius: var(--radius-card);
+    background-color: color-mix(in srgb, var(--color-ivory) 55%, #fff);
+  }
+
+  /* ---------- Segmented control ---------- */
+  /* Replaces the underline tab strip on tool pages with a pill switch. */
+  .segmented {
+    display: inline-flex;
+    gap: 0.25rem;
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 12%, transparent);
+    border-radius: var(--radius-btn);
+    background-color: color-mix(in srgb, var(--color-charcoal) 5%, transparent);
+    padding: 0.25rem;
+  }
+
+  .segmented-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    transition:
+      background-color 0.3s var(--ease-out-soft),
+      color 0.3s var(--ease-out-soft),
+      box-shadow 0.3s var(--ease-out-soft);
+  }
+
+  .segmented-item:hover {
+    color: var(--color-charcoal);
+  }
+
+  .segmented-item[aria-selected="true"] {
+    background-color: var(--color-burgundy);
+    color: var(--color-ivory);
+    box-shadow: 0 10px 22px -14px color-mix(in srgb, var(--color-burgundy) 90%, transparent);
+  }
+
+  .segmented-item:focus-visible {
+    outline: 2px solid var(--color-gold-strong);
+    outline-offset: 2px;
+  }
+
+  /* Count badge inside a segmented item. */
+  .segmented-count {
+    border-radius: var(--radius-btn);
+    background-color: color-mix(in srgb, var(--color-charcoal) 10%, transparent);
+    padding: 0.0625rem 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .segmented-item[aria-selected="true"] .segmented-count {
+    background-color: color-mix(in srgb, var(--color-ivory) 22%, transparent);
+  }
+
+  /* ---------- Form controls ---------- */
+  .field-label {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-charcoal);
+  }
+
+  .field {
+    margin-top: 0.5rem;
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--color-charcoal) 20%, transparent);
+    border-radius: var(--radius-field);
+    background-color: #fff;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    color: var(--color-charcoal);
+    transition:
+      border-color 0.25s var(--ease-out-soft),
+      box-shadow 0.25s var(--ease-out-soft);
+  }
+
+  .field::placeholder {
+    color: color-mix(in srgb, var(--color-charcoal) 32%, transparent);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-gold-strong);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-gold) 40%, transparent);
+  }
+
+  /* Touch devices have no hover, so a hovered state can stick after a tap.
+     Neutralise every hover-only effect where the pointer cannot hover. */
+  @media (hover: none) {
+    .card:hover,
+    .btn:hover:not(:disabled),
+    .btn-primary:hover,
+    .btn-gold:hover,
+    .btn-outline:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .card:hover {
+      border-color: color-mix(in srgb, var(--color-charcoal) 12%, transparent);
+    }
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    padding: 0.9375rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    transition:
+      background-color 0.3s var(--ease-out-soft),
+      color 0.3s var(--ease-out-soft),
+      border-color 0.3s var(--ease-out-soft),
+      transform 0.3s var(--ease-out-soft),
+      box-shadow 0.3s var(--ease-out-soft);
+  }
+
+  /* Buttons share one tactile response so the whole site feels consistent. */
+  .btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  .btn:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-gold-strong);
+    outline-offset: 3px;
+  }
+
+  .btn-primary {
+    background-color: var(--color-burgundy);
+    color: var(--color-ivory);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-burgundy-accent);
+    box-shadow: 0 14px 28px -18px color-mix(in srgb, var(--color-burgundy) 85%, transparent);
+  }
+
+  .btn-gold {
+    background-color: var(--color-gold);
+    color: var(--color-burgundy-deep);
+  }
+
+  .btn-gold:hover {
+    background-color: var(--color-gold-strong);
+    box-shadow: 0 14px 28px -18px color-mix(in srgb, var(--color-gold-strong) 90%, transparent);
+  }
+
+  .btn-outline {
+    border: 1px solid color-mix(in srgb, var(--color-gold) 70%, transparent);
+    color: var(--color-gold);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--color-gold);
+    color: var(--color-burgundy-deep);
+    box-shadow: 0 14px 28px -18px color-mix(in srgb, var(--color-gold) 80%, transparent);
+  }
+
+  /* ---------- Organic portrait layers ---------- */
+  /* Only these background layers morph. The portrait clip and the person
+     inside it stay completely still. */
+  .organic-a {
+    border-radius: var(--radius-blob-a);
+    animation: blob-drift-a 11s ease-in-out infinite;
+  }
+
+  .organic-b {
+    border-radius: var(--radius-blob-b);
+    animation: blob-drift-b 9.5s ease-in-out infinite;
+  }
+
+  .organic-c {
+    border-radius: var(--radius-blob-c);
+    animation: blob-drift-c 12s ease-in-out infinite;
+  }
+
+  .portrait-mask {
+    border-radius: var(--radius-blob-b);
+  }
+
+  .portrait-enter {
+    animation: portrait-in 1.15s var(--ease-out-soft) both;
+  }
+
+  /* ---------- Misc ---------- */
+  /* Gentle upward reveal for items that mount on their own (review cards). */
+  .reveal-item {
+    animation: reveal-item 0.6s var(--ease-out-soft) both;
+  }
+
+  .drawer {
+    animation: drawer-in-ltr 0.28s var(--ease-out-soft);
+  }
+
+  .drawer:dir(rtl) {
+    animation-name: drawer-in-rtl;
+  }
+
+  .scrim {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  /* Loading placeholder. A slow opacity pulse rather than a travelling
+     highlight, so it reads as calm rather than busy. */
+  .skeleton {
+    background-color: color-mix(in srgb, var(--color-charcoal) 9%, transparent);
+    animation: skeleton-pulse 1.9s ease-in-out infinite;
+  }
+}
+
+/* Very small deformation of the surrounding shape only. */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes blob-drift-a {
+  0%,
+  100% {
+    border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%;
+  }
+  33% {
+    border-radius: 53% 47% 58% 42% / 45% 55% 45% 55%;
+  }
+  66% {
+    border-radius: 42% 58% 49% 51% / 58% 42% 58% 42%;
+  }
+}
+
+@keyframes blob-drift-b {
+  0%,
+  100% {
+    border-radius: 58% 42% 39% 61% / 44% 54% 46% 56%;
+  }
+  50% {
+    border-radius: 44% 56% 62% 38% / 57% 43% 57% 43%;
+  }
+}
+
+@keyframes blob-drift-c {
+  0%,
+  100% {
+    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  }
+  40% {
+    border-radius: 60% 40% 45% 55% / 42% 58% 42% 58%;
+  }
+  75% {
+    border-radius: 47% 53% 62% 38% / 52% 48% 52% 48%;
+  }
+}
+
+@keyframes reveal-item {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes portrait-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes soft-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Animates `translate`, not `transform`, so the hover/focus scale on the same
+   element is not overwritten by the animation. */
+  @keyframes whatsapp-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -4px;
+    }
+  }
+
+@keyframes drawer-in-ltr {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes drawer-in-rtl {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .organic-a,
+  .organic-b,
+  .organic-c,
+  .portrait-enter,
+  .reveal-item,
+  .drawer,
+  .scrim,
+  .skeleton {
+    animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card,
+  .field,
+  .btn {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

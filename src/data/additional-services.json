@@ -1,0 +1,36 @@
+{
+  "additionalServices": [
+    {
+      "id": "clear-aligner-models",
+      "title": { "ar": "نماذج التقويم الشفاف", "en": "Clear Aligner Models" },
+      "description": {
+        "ar": "تصنيع نماذج دقيقة لحالات التقويم الشفاف بالتنسيق مع خطة الطبيب.",
+        "en": "Accurate models for clear aligner cases, produced in coordination with the dentist's treatment plan."
+      }
+    },
+    {
+      "id": "inlays-onlays",
+      "title": { "ar": "الحشوات غير المباشرة", "en": "Inlays & Onlays" },
+      "description": {
+        "ar": "إنليز وأونليز مصنّعة معملياً للحالات المتوسطة والكبيرة.",
+        "en": "Laboratory-made inlays and onlays for moderate to extensive restorative cases."
+      }
+    },
+    {
+      "id": "temporary-restorations",
+      "title": { "ar": "تركيبات مؤقتة", "en": "Temporary Restorations" },
+      "description": {
+        "ar": "تركيبات انتقالية مريحة إلى أن تجهز التركيبة النهائية.",
+        "en": "Comfortable provisional restorations used until the final restoration is ready."
+      }
+    },
+    {
+      "id": "occlusion-analysis-models",
+      "title": { "ar": "نماذج تحليل الإطباق", "en": "Occlusion Analysis Models" },
+      "description": {
+        "ar": "نماذج دراسة دقيقة لتقييم القضم قبل التخطيط للحالات المعقدة.",
+        "en": "Accurate study models for evaluating occlusion before planning complex cases."
+      }
+    }
+  ]
+}

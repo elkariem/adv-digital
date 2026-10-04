@@ -1,0 +1,76 @@
+{
+  "services": [
+    {
+      "id": "veneers",
+      "title": { "ar": "الفينير", "en": "Veneers" },
+      "description": {
+        "ar": "قشور خزفية رفيعة لتصحيح شكل ولون الأسنان الأمامية بأقل قدر ممكن من برد السن.",
+        "en": "Thin ceramic veneers designed to improve the shape and shade of anterior teeth while minimizing tooth preparation."
+      },
+      "bestFor": {
+        "ar": "الأنسب للتجميل الأمامي والابتسامة",
+        "en": "Ideal for anterior aesthetics and smile enhancement"
+      }
+    },
+    {
+      "id": "lumineers",
+      "title": { "ar": "اللومنير", "en": "Lumineers" },
+      "description": {
+        "ar": "قشور فائقة الرقة تتركب غالباً من غير برد للسن، كخيار أقل تدخلاً من الفينير التقليدي.",
+        "en": "Ultra-thin veneers that can often be placed with minimal or no tooth preparation, offering a less invasive alternative to traditional veneers."
+      },
+      "bestFor": {
+        "ar": "الأنسب لمن يفضّل الحد الأدنى من التدخل",
+        "en": "Ideal for cases where minimal intervention is preferred"
+      }
+    },
+    {
+      "id": "zircon",
+      "title": { "ar": "الزيركون", "en": "Zirconia" },
+      "description": {
+        "ar": "تيجان وجسور بقوة تحمل عالية ومظهر طبيعي قريب من مينا السن، مصممة رقمياً بالكامل.",
+        "en": "High-strength crowns and bridges with a natural enamel-like appearance, fully designed digitally."
+      },
+      "bestFor": {
+        "ar": "الأنسب لحالات الكسر والتسوس الكبير",
+        "en": "Ideal for extensive decay and fractured-tooth cases"
+      }
+    },
+    {
+      "id": "implants",
+      "title": { "ar": "الزراعة", "en": "Implant Restorations" },
+      "description": {
+        "ar": "تيجان وجسور فوق الزرعات بمطابقة دقيقة تساعد على الحفاظ على استقرار الزرعة على المدى الطويل.",
+        "en": "Implant-supported crowns and bridges designed for precise fit and long-term stability."
+      },
+      "bestFor": {
+        "ar": "الأنسب للحالات المدعومة بزرعات",
+        "en": "Ideal for implant-supported cases"
+      }
+    },
+    {
+      "id": "acrylic",
+      "title": { "ar": "الأكريليك المرن والقاسي", "en": "Flexible & Hard Acrylic" },
+      "description": {
+        "ar": "أطقم متحركة كاملة وجزئية بخامتين حسب راحة المريض وثبات القضم المطلوب.",
+        "en": "Complete and partial removable dentures available in flexible and hard acrylic according to comfort and functional requirements."
+      },
+      "bestFor": {
+        "ar": "الأنسب لفقدان الأسنان الجزئي أو الكلي",
+        "en": "Ideal for partial or complete tooth loss"
+      }
+    },
+    {
+      "id": "orthodontic-appliances",
+      "title": { "ar": "أجهزة التقويم", "en": "Orthodontic Appliances" },
+      "description": {
+        "ar": "تصنيع أجهزة التقويم الثابتة والمتحركة حسب خطة الطبيب المعالج.",
+        "en": "Fixed and removable orthodontic appliances manufactured according to the treating dentist's plan."
+      },
+      "bestFor": {
+        "ar": "الأنسب لحالات تقويم الأسنان والفكين",
+        "en": "Ideal for orthodontic and jaw alignment cases"
+      }
+    }
+  ]
+}
